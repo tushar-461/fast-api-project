@@ -1,0 +1,32 @@
+# Python virtualenv
+venv/
+__pycache__/
+*.py[cod]
+
+# SQLite database
+app.db
+
+# VSCode settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python egg metadata
+*.egg-info/
+
+env/
+
+# distribution files
+build/
+dist/
+
+# mypy cache
+.mypy_cache/
+
+# pytest cache
+.pytest_cache/
+
+# logs
+*.log

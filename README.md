@@ -8,6 +8,13 @@ It features:
 - **Front-end** powered by Jinja2 templates
 - **Dashboard** showing joined data with columns: `Name`, `Age`, `Country`, `Item`, `Amount`, `Shipping Status`
 
+## Structure (Production-Ready Direction)
+
+Key pieces are split for maintainability:
+
+- `app/core/` - shared app config and logging setup
+- `app/routers/` - route handlers grouped by area
+
 ## Getting Started
 
 1. **Clone the repository (if not already).**
@@ -29,21 +36,7 @@ It features:
 The SQLite database file (`app.db`) is created automatically in the project root.  
 If you want to reset the data, simply delete `app.db` and restart the server.
 
-## Notes
+## Model
 - The seed data was modelled after a Programiz example showing a customer–orders relationship. A CSV file (`data/programiz_sample.csv`) holds the same sample and is loaded on first startup.
 - For production deployment you should replace the simple session middleware secret key, configure environment variables appropriately, and consider using migrations (Alembic) along with a more robust authentication system.
 
-## Docker
-
-A `Dockerfile` is included for containerized deployment:
-
-```bash
-# build image
-docker build -t fastapi-sample .
-# run container
-docker run -p 8000:8000 fastapi-sample
-```
-
----
-
-Feel free to expand or refactor as needed.

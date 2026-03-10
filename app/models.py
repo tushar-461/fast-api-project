@@ -4,6 +4,16 @@ from sqlalchemy.orm import relationship
 from .database import Base
 
 
+class Shipping(Base):
+    __tablename__ = "shippings"
+
+    shipping_id = Column(Integer, primary_key=True, index=True)
+    status = Column(String(100))
+    customer_id = Column(Integer, ForeignKey("customers.customer_id"))
+
+    customer = relationship("Customer", back_populates="shipping")
+
+
 class User(Base):
     __tablename__ = "users"
 
@@ -15,21 +25,22 @@ class User(Base):
 class Customer(Base):
     __tablename__ = "customers"
 
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
+    customer_id = Column(Integer, primary_key=True, index=True)
+    first_name = Column(String(100), index=True)
+    last_name = Column(String(100), index=True)
     age = Column(Integer)
-    country = Column(String)
+    country = Column(String(100))
 
     orders = relationship("Order", back_populates="customer")
+    shipping = relationship("Shipping", back_populates="customer", uselist=False)
 
 
 class Order(Base):
     __tablename__ = "orders"
 
-    id = Column(Integer, primary_key=True, index=True)
-    item = Column(String)
+    order_id = Column(Integer, primary_key=True, index=True)
+    item = Column(String(100))
     amount = Column(Integer)
-    shipping_status = Column(String)
-    customer_id = Column(Integer, ForeignKey("customers.id"))
+    customer_id = Column(Integer, ForeignKey("customers.customer_id"))
 
     customer = relationship("Customer", back_populates="orders")

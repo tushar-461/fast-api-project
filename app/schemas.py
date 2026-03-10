@@ -16,7 +16,8 @@ class UserOut(BaseModel):
 
 
 class CustomerBase(BaseModel):
-    name: str
+    first_name: str
+    last_name: str
     age: int
     country: str
 
@@ -26,7 +27,7 @@ class CustomerCreate(CustomerBase):
 
 
 class Customer(CustomerBase):
-    id: int
+    customer_id: int
 
     class Config:
         orm_mode = True
@@ -35,7 +36,6 @@ class Customer(CustomerBase):
 class OrderBase(BaseModel):
     item: str
     amount: int
-    shipping_status: str
     customer_id: Optional[int] = None
     customer_name: Optional[str] = None
 
@@ -45,19 +45,36 @@ class OrderCreate(OrderBase):
 
 
 class Order(OrderBase):
-    id: int
+    order_id: int
+
+    class Config:
+        orm_mode = True
+
+
+class ShippingBase(BaseModel):
+    status: str
+    customer_id: Optional[int] = None
+
+
+class ShippingCreate(ShippingBase):
+    pass
+
+
+class Shipping(ShippingBase):
+    shipping_id: int
 
     class Config:
         orm_mode = True
 
 
 class OrderJoined(BaseModel):
-    name: str
+    first_name: str
+    last_name: str
     age: int
     country: str
     item: str
     amount: int
-    shipping_status: str
+    shipping_status: Optional[str] = None
 
     class Config:
         orm_mode = True

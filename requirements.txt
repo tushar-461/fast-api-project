@@ -4,3 +4,5 @@ SQLAlchemy
 Jinja2
 passlib[bcrypt]
 python-multipart
+itsdangerous
+bcrypt<4

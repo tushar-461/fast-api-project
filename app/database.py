@@ -17,7 +17,7 @@ def init_db():
     Base.metadata.create_all(bind=engine)
 
     # populate with sample data if empty
-    from .crud import get_orders_count, create_customer, create_order
+    from .crud import get_orders_count, create_customer, create_order, create_shipping
     if get_orders_count() == 0:
         # attempt to load sample data from CSV (Programiz link)
         import csv
@@ -26,25 +26,27 @@ def init_db():
             with open(sample_file, newline="", encoding="utf-8") as csvfile:
                 reader = csv.DictReader(csvfile)
                 for row in reader:
-                    cust = {"name": row["name"], "age": int(row["age"]), "country": row["country"]}
-                    create_customer(cust)
-                    order = {"item": row["item"], "amount": int(row["amount"]),
-                             "shipping_status": row["shipping_status"], "customer_name": row["name"]}
+                    # split name into first/last
+                    parts = row.get("name", "").split()
+                    first = parts[0] if parts else ""
+                    last = parts[1] if len(parts) > 1 else ""
+                    cust = {"first_name": first, "last_name": last, "age": int(row["age"]), "country": row["country"]}
+                    created = create_customer(cust)
+                    order = {"item": row["item"], "amount": int(row["amount"]), "customer_id": created.customer_id}
                     create_order(order)
+                    # optionally create shipping row for this customer
+                    shipping = {"status": row.get("shipping_status", ""), "customer_id": created.customer_id}
+                    create_shipping(shipping)
         else:
             # fallback hardcoded data
-            customers = [
-                {"name": "Alice", "age": 30, "country": "USA"},
-                {"name": "Bob", "age": 24, "country": "Canada"},
-                {"name": "Carlos", "age": 28, "country": "Spain"},
+            sample = [
+                {"first_name": "Alice", "last_name": "Smith", "age": 30, "country": "USA", "item": "Book", "amount": 3, "shipping_status": "Delivered"},
+                {"first_name": "Bob", "last_name": "Jones", "age": 24, "country": "Canada", "item": "Laptop", "amount": 1, "shipping_status": "Shipped"},
+                {"first_name": "Carlos", "last_name": "Reyes", "age": 28, "country": "Spain", "item": "Pen", "amount": 10, "shipping_status": "Processing"},
             ]
-            orders = [
-                {"item": "Book", "amount": 3, "shipping_status": "Delivered", "customer_name": "Alice"},
-                {"item": "Laptop", "amount": 1, "shipping_status": "Shipped", "customer_name": "Bob"},
-                {"item": "Pen", "amount": 10, "shipping_status": "Processing", "customer_name": "Carlos"},
-            ]
-            for cust in customers:
-                create_customer(cust)
-            for ord in orders:
-                create_order(ord)
+            for entry in sample:
+                cust = {"first_name": entry["first_name"], "last_name": entry["last_name"], "age": entry["age"], "country": entry["country"]}
+                created = create_customer(cust)
+                create_order({"item": entry["item"], "amount": entry["amount"], "customer_id": created.customer_id})
+                create_shipping({"status": entry["shipping_status"], "customer_id": created.customer_id})
 

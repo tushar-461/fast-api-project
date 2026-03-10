@@ -1,4 +1,6 @@
-name,age,country,item,amount,shipping_status
-Alice,30,USA,Book,3,Delivered
-Bob,24,Canada,Laptop,1,Shipped
-Carlos,28,Spain,Pen,10,Processing
+first_name,last_name,age,country,item,amount,shipping_status
+John,Doe,31,USA,Keyboard,400,Delivered
+Robert,Luna,22,Canada,Mouse,300,Shipped
+David,Robinson,22,USA,Monitor,12000,Processing
+John,Reinhardt,25,USA,Keyboard,400,Delivered
+Betty,Doe,28,Canada,Mousepad,250,Shipped
