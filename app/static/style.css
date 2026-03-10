@@ -1,0 +1,6 @@
+body { font-family: Arial, sans-serif; background: #f4f4f4; }
+.container { width: 500px; margin: 50px auto; background: white; padding: 20px; border-radius: 4px; }
+.error { color: red; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 8px; border: 1px solid #ccc; text-align: left; }
+th { background: #eee; }

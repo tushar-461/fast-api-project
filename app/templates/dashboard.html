@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container">
+    <h2>Dashboard</h2>
+    <p>Welcome, {{ user }}! <a href="/logout">Logout</a></p>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Country</th>
+            <th>Item</th>
+            <th>Amount</th>
+            <th>Shipping Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in rows %}
+            <tr>
+                <td>{{ row.name }}</td>
+                <td>{{ row.age }}</td>
+                <td>{{ row.country }}</td>
+                <td>{{ row.item }}</td>
+                <td>{{ row.amount }}</td>
+                <td>{{ row.shipping_status }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

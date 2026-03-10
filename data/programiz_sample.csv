@@ -1,0 +1,4 @@
+name,age,country,item,amount,shipping_status
+Alice,30,USA,Book,3,Delivered
+Bob,24,Canada,Laptop,1,Shipped
+Carlos,28,Spain,Pen,10,Processing
