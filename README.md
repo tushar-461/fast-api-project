@@ -8,8 +8,7 @@ It features:
 - **Front-end** powered by Jinja2 templates
 - **Dashboard** showing joined data with columns: `Name`, `Age`, `Country`, `Item`, `Amount`, `Shipping Status`
 
-## Structure (Production-Ready Direction)
-
+## Structure 
 Key pieces are split for maintainability:
 
 - `app/core/` - shared app config and logging setup
